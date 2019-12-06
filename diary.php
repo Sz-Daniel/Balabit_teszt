@@ -3,6 +3,16 @@
 	//table:diary db:balabit_teszt
 	require_once 'connect.php';
 	
+	if(isset($_POST['feelRateSend']) && !empty($_POST['feelRateSend']) 
+		&& ($_POST['actualGoalSend']) && !empty($_POST['actualGoalSend']) 
+	&& ($_POST['actualGoalStatusSend']) && !empty(_POST['actualGoalStatusSend'])){
+		if ( $db->query("
+		INSERT INTO `diary` (`day`, `feelRate`, `actualGoal`, `actualGoalStatus`, `dailyDate`) 
+		VALUES (NULL, '".$feelRateSend."', '".$actualGoalSend."', '".$actualGoalStatusSend."', NOW())")){
+				//echo "win";
+		}
+	}
+	
 	if ($result = $db->query("SELECT * FROM diary ORDER BY day DESC LIMIT 1"))
 	{
 		$row = $result->fetch_assoc();
